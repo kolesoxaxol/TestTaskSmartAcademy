@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace SmartDAL
 {
-    interface IGenericRepository<TEntity>
+    public interface IGenericRepository<TEntity>
     where TEntity : class
     {
         void Delete(object id);
@@ -14,5 +14,6 @@ namespace SmartDAL
         TEntity GetById(object id);
         void Insert(TEntity entity);
         void Update(TEntity entityToUpdate);
+        void Save();
     }
 }

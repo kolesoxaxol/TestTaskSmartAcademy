@@ -102,5 +102,9 @@ namespace SmartDAL
             }
         }
 
+        public void Save()
+        {
+            Context.SaveChanges();
+        }
     }
 }

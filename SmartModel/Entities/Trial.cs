@@ -25,7 +25,10 @@ namespace SmartModel.Entities
 
         [StringLength(20, MinimumLength = 3, ErrorMessage = "min - 3 , max - 20 symbols")]
         public string InterventionType { get; set; }
+
         [Required]
         public int Phase { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
