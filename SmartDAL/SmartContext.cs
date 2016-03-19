@@ -5,7 +5,7 @@ namespace SmartDAL
 {
     public class SmartContext : DbContext
     {
-        public DbSet<Trial> Games { get; set; }     
+        public DbSet<Trial> Trials { get; set; }     
         public SmartContext()
             : base("SmartContext")
         {

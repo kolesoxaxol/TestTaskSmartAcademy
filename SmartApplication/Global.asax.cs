@@ -1,7 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Autofac;
+using Autofac.Integration.Mvc;
+using SmartApplication.Utilities;
+using SmartBusinessLogic.Services;
+using SmartDAL;
+using SmartModel.Entities;
+using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -13,6 +16,9 @@ namespace SmartApplication
     {
         protected void Application_Start()
         {
+
+            AutofacConfig.Config();
+            Database.SetInitializer(new SmartContextDbInitializer());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

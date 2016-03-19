@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SmartBusinessLogic.Services
 {
-    class TrialService : ITrialService
+    public class TrialService : ITrialService
     {
         private readonly IGenericRepository<Trial> _repository;
      
