@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SmartModel.Entities;
 using SmartDAL;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmartBusinessLogic.Services
 {
@@ -14,22 +14,22 @@ namespace SmartBusinessLogic.Services
         {
             _repository = repository;
         }
-        public IEnumerable<Trial> Get()
+        public async Task<IEnumerable<Trial>> Get()
         {
             try
             {
-                return _repository.Get();
+                return await _repository.Get();
             }
             catch (Exception ex)
             {
                 throw;
             }
         }
-        public Trial GetById(int id)
+        public async Task<Trial> GetById(int? id)
         {
             try
             {
-                return _repository.GetById(id);
+                return await _repository.GetById(id);
             }
             catch (Exception ex)
             {
@@ -59,23 +59,13 @@ namespace SmartBusinessLogic.Services
                 throw;
             }
         }
-        public int GetTrialsCount()
+        public bool Update(Trial trial)
         {
             try
             {
-                return _repository.Get().ToList().Count;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-        public void Update(Trial game)
-        {
-            try
-            {
-                _repository.Update(game);
+                _repository.Update(trial);
                 _repository.Save();
+                return true;
             }
             catch (Exception ex)
             {
@@ -100,6 +90,10 @@ namespace SmartBusinessLogic.Services
             {
                 throw;
             }
+        }
+        public void Dispose()
+        {
+            _repository.Dispose();
         }
 
     }

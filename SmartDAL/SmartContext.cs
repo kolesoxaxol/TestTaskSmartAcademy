@@ -11,5 +11,7 @@ namespace SmartDAL
         {
 
         }
+
+        public System.Data.Entity.DbSet<SmartModel.ViewModel.TrialModel> TrialModels { get; set; }
     }
 }

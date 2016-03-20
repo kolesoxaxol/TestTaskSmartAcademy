@@ -1,22 +1,22 @@
 ﻿using SmartModel.Entities;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
 
 namespace SmartBusinessLogic.Services
 {
     public interface ITrialService
     {
        
-        Trial GetById(int id);
+        Task<Trial> GetById(int? id);
 
         void New(Trial trial);
 
-        int GetTrialsCount();
+        Task<IEnumerable<Trial>> Get();
 
-        IEnumerable<Trial> Get();
-
-        void Update(Trial game);
+        bool Update(Trial trial);
 
         bool Delete(Trial trial);
+
+        void Dispose();
     }
 }

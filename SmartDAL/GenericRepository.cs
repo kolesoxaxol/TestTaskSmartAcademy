@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace SmartDAL
 {
@@ -24,37 +25,15 @@ namespace SmartDAL
 
         }
 
-        public virtual IEnumerable<TEntity> Get(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "")
+        public virtual async Task<IEnumerable<TEntity>> Get()
         {
-            var query = DbSet.ToList<TEntity>().AsQueryable();
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(includeProperty);
-            }
-
-            if (orderBy != null)
-            {
-                return orderBy(query).ToList();
-            }
-            else
-            {
-                return query.ToList();
-            }
+            var query = await DbSet.ToListAsync<TEntity>();
+            return query;
         }
 
-        public virtual TEntity GetById(object id)
+        public virtual async Task<TEntity> GetById(object id)
         {
-            return DbSet.Find(id);
+            return await DbSet.FindAsync(id);
         }
 
         public virtual void Insert(TEntity entity)
@@ -62,9 +41,9 @@ namespace SmartDAL
             DbSet.Add(entity);
         }
 
-        public virtual void Delete(object id)
+        public virtual async void Delete(object id)
         {
-            TEntity entityToDelete = DbSet.Find(id);
+            TEntity entityToDelete = await DbSet.FindAsync(id);
             Delete(entityToDelete);
         }
 
@@ -104,7 +83,12 @@ namespace SmartDAL
 
         public void Save()
         {
-            Context.SaveChanges();
+          Context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            Context.Dispose();
         }
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="IGenericModel.cs" />
     <Compile Include="MetaEntities\MetaTrial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\TrialModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
